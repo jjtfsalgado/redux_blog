@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions/index';
-import { Link } from 'react-router-dom';
+import { fetchPosts, fetchSinglePost } from '../actions/index';
+import { Link } from 'react-router';
 
 class PostsIndex extends Component {
   componentWillMount(){
@@ -9,9 +9,10 @@ class PostsIndex extends Component {
   }
 
   renderPosts() {
+    const {fetchSinglePost} = this.props;
     return this.props.posts.map(function (post) {
       return(
-        <li className="list-group-item" key={ post.id }>
+        <li className="list-group-item" key={ post.id } onClick={ () => fetchSinglePost(post.id) }>
           { post.title }
         </li>
       )
@@ -38,6 +39,6 @@ export default connect(
     posts: state.posts.posts
   }),
 
-  { fetchPosts }
+  { fetchPosts, fetchSinglePost }
 
 )(PostsIndex);

@@ -1,6 +1,7 @@
 const initialState = {
   posts: [],
-  error: ''
+  error: '',
+  selectedPost: null
 }
 
 export const posts = ( state = initialState, action ) => {
@@ -15,6 +16,12 @@ export const posts = ( state = initialState, action ) => {
       return {
         ...state,
         error: action.payload
+      }
+    }
+    case 'FETCH_SINGLE_POST_SUCCESS': {
+      return {
+        ...state,
+        selectedPost: action.payload
       }
     }
   }
